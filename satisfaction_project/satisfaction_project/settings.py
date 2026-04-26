@@ -108,6 +108,13 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # WHITENOISE (production)
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+'''STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'django_plotly_dash.finders.DashAssetFinder',
+    'django_plotly_dash.finders.DashComponentFinder',
+]'''
+
 # DASH CONFIG
 PLOTLY_COMPONENTS = [
     'dash_core_components',
