@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}
+Dashboard Satisfaction
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <h1>Dashboard Enquête de Satisfaction</h1>
+
+    {% load plotly_dash %}
+
+    {% plotly_app name="SatisfactionDashboard" %}
+
+</div>
+
+<style>
+    .container {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    h1 {
+        text-align: center;
+    }
+</style>
+
+{% endblock %}

@@ -1,0 +1,1 @@
+web: gunicorn satisfaction_project.wsgi

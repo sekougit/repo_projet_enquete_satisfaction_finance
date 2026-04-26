@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}
+Upload CSV
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <h2>Upload fichier CSV</h2>
+
+    <p class="info">Importer les données de l’enquête de satisfaction</p>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">Importer</button>
+    </form>
+
+</div>
+
+<style>
+    .container {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        width: 600px;
+        margin: auto;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 20px;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        margin-top: 20px;
+        background: #28a745;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #218838;
+    }
+
+    .info {
+        text-align: center;
+        margin-bottom: 15px;
+        color: #666;
+    }
+</style>
+
+{% endblock %}
