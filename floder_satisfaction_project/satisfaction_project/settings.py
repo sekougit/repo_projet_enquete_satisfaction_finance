@@ -23,9 +23,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'django_plotly_dash',
+    'django_plotly_dash',
     # Apps externes
-    'django_plotly_dash.apps.DjangoPlotlyDashConfig',
+    #'django_plotly_dash.apps.DjangoPlotlyDashConfig',
     'dpd_static_support',
     'crispy_forms',
 
@@ -71,18 +71,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'satisfaction_project.wsgi.application'
 
-'''
+
 # DATABASE
 DATABASES = {
     'default': dj_database_url.config(
         default=env('DATABASE_URL', default=f'sqlite:///{BASE_DIR}/db.sqlite3'),
         conn_max_age=600
     )
-}'''
-
+}
+'''
 DATABASES = {
     "default": dj_database_url.config(default=os.environ.get("DATABASE_URL"))
-}
+}'''
 
 # AUTH USER MODEL (si tu as CustomUser)
 AUTH_USER_MODEL = 'accounts.CustomUser'
@@ -127,6 +127,7 @@ PLOTLY_COMPONENTS = [
     'dash_renderer',
     'dpd_components',
     'dpd_static_support',
+    'django_plotly_dash'
 ]
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'

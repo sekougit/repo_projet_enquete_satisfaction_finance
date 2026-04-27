@@ -8,6 +8,8 @@ from dash import dcc, html
 import dash_bootstrap_components as dbc
 from survey.models import SatisfactionSurvey
 
+
+
 # ==========================
 # CHARGEMENT DES DONNEES
 # ==========================
@@ -33,6 +35,7 @@ def load_data():
 
     return df
 
+
 # ==========================
 # DATA
 # ==========================
@@ -44,6 +47,8 @@ data.columns = data.columns.str.strip().str.lower()
 for col in ["satisfaction_globale", "confiance_service", "service_principal"]:
     if col in data.columns:
         data[col] = data[col].fillna("")
+
+
 
 
 # ==========================
@@ -90,6 +95,14 @@ app = DjangoDash(
     external_stylesheets=[dbc.themes.BOOTSTRAP]
 )
 
+# Données exemple
+df_exemple = pd.DataFrame({
+    "Mois": ["Jan", "Fev", "Mar", "Avr"],
+    "Valeur": [10, 20, 15, 30]
+})
+
+# Graphique
+fig_exemple = px.bar(df_exemple, x="Mois", y="Valeur")
 
 # ==========================
 # KPI CARDS FIXED (NO OVERFLOW)
@@ -141,7 +154,11 @@ app.layout = html.Div([
     dbc.Row([
         dbc.Col(dcc.Graph(figure=fig_bar), width=6),
         dbc.Col(dcc.Graph(figure=fig_region), width=6),
-    ], className="g-2")
+    ], className="g-2"),
+
+    html.Br(),
+
+    dcc.Graph(figure=fig_exemple)
 
 ], style={
     "width": "100%",
