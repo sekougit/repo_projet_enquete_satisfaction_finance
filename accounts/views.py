@@ -22,6 +22,12 @@ from .forms import ForgotPasswordForm
 
 User = get_user_model()
 
+from django.contrib.auth.views import LoginView
+
+
+class CustomLoginView(LoginView):
+    template_name = "accounts/login.html"
+
 def login_view(request):
     if request.method == "POST":
         username = request.POST.get("username")
