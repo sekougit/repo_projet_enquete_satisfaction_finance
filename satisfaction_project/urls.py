@@ -21,6 +21,8 @@ from django.shortcuts import redirect
 urlpatterns = [
     path('', lambda request: redirect('login')),
     path('admin/', admin.site.urls),
+        # IMPORTANT
+    path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/', include('accounts.urls')),
     path('survey/', include('survey.urls')),
     path('dashboard/', include('dashboard.urls')),
