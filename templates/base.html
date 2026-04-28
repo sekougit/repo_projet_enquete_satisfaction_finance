@@ -5,18 +5,28 @@
     <title>{% block title %}Satisfaction App{% endblock %}</title>
 
     <style>
+
         body {
             margin: 0;
             font-family: Arial;
             display: flex;
+            background: #f4f6f9;
         }
 
+        /* SIDEBAR */
         .sidebar {
             width: 220px;
             height: 100vh;
             background: #1f2937;
             color: white;
             padding: 20px;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+
+        .sidebar h3 {
+            margin-bottom: 30px;
         }
 
         .sidebar a {
@@ -24,23 +34,74 @@
             color: white;
             text-decoration: none;
             margin: 15px 0;
+            font-size: 15px;
         }
 
         .sidebar a:hover {
             color: #00d1ff;
         }
 
-        .content {
-            flex: 1;
-            padding: 20px;
-            background: #f4f6f9;
-        }
-
         .logout {
             margin-top: 30px;
-            display: block;
-            color: red;
+            color: #ff6b6b;
         }
+
+        /* CONTENT */
+        .content {
+            margin-left: 240px;
+            flex: 1;
+            padding: 30px;
+        }
+
+        /* USER MENU */
+        .user-menu {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            z-index: 999;
+        }
+
+        .profile-btn {
+            background: #0d6efd;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background: white;
+            min-width: 220px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 12px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .dropdown-content a:hover {
+            background: #f2f2f2;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
     </style>
 </head>
 
@@ -48,19 +109,56 @@
 
 <!-- SIDEBAR -->
 <div class="sidebar">
+
     <h3>Menu</h3>
 
     <a href="/survey/upload/">📥 Chargement</a>
+
     <a href="/survey/preview/">📂 Base de données</a>
+
     <a href="/dashboard/">📊 Dashboard</a>
 
-    <a class="logout" href="/accounts/logout/">🚪 Déconnexion</a>
+    <a class="logout" href="{% url 'logout' %}">
+        🚪 Déconnexion
+    </a>
+
+</div>
+
+<!-- USER PROFILE -->
+<div class="user-menu">
+
+    <div class="dropdown">
+
+        <button class="profile-btn">
+            👤 {{ request.user.username }}
+        </button>
+
+        <div class="dropdown-content">
+
+            <a href="{% url 'profile' %}">
+                👤 Mon Profil
+            </a>
+
+            <a href="{% url 'change_password' %}">
+                🔒 Modifier mot de passe
+            </a>
+
+            <a href="{% url 'logout' %}">
+                🚪 Déconnexion
+            </a>
+
+        </div>
+
+    </div>
+
 </div>
 
 <!-- CONTENT -->
 <div class="content">
+
     {% block content %}
     {% endblock %}
+
 </div>
 
 </body>

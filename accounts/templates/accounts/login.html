@@ -67,6 +67,14 @@
         <button type="submit">Se connecter</button>
     </form>
 
+    <br>
+
+    <a href="{% url 'forgot_password' %}">
+        <button type="button">
+            Mot de passe oublié ?
+        </button>
+    </a>
+
     {% if form.errors %}
         <p style="color:red;">Identifiants incorrects</p>
     {% endif %}
