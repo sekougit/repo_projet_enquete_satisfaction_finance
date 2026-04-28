@@ -86,48 +86,19 @@ User = get_user_model()
 
 def forgot_password_view(request):
 
-    if request.method == 'POST':
+    form = PasswordResetForm(request.POST or None)
 
-        form = ForgotPasswordForm(request.POST)
+    if request.method == "POST":
 
         if form.is_valid():
+            form.save(
+                request=request,
+                use_https=True,
+                email_template_name="accounts/password_reset_email.html"
+            )
+            return redirect("password_reset_done")
 
-            email = form.cleaned_data['email']
-
-            try:
-                user = User.objects.get(email=email)
-
-                token = default_token_generator.make_token(user)
-
-                reset_url = request.build_absolute_uri(
-                    reverse(
-                        'password_reset_confirm',
-                        args=[user.pk, token]
-                    )
-                )
-
-                send_mail(
-                    'Réinitialisation mot de passe',
-                    f'Clique ici pour réinitialiser : {reset_url}',
-                    settings.DEFAULT_FROM_EMAIL,
-                    [email],
-                    fail_silently=False,
-                )
-
-                return redirect('login')
-
-            except User.DoesNotExist:
-                pass
-
-    else:
-        form = ForgotPasswordForm()
-
-    return render(
-        request,
-        'accounts/forgot_password.html',
-        {'form': form}
-    )
-
+    return render(request, "accounts/forgot_password.html", {"form": form})
 
 @login_required
 def profile_view(request):
